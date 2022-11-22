@@ -15,6 +15,8 @@ public class MovieReservation {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("moviereservation.MovieReservation.main()");
+        MainFrame mainFrame = new MainFrame();
     }
     
 }
