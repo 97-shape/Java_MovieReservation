@@ -20,10 +20,12 @@ public class PosterPanel extends javax.swing.JPanel {
      */
     
     private Image img;
+    Dimension d = new Dimension(294, 420);
     
     public void nextImg(String name){
         try{
             this.img = ImageIO.read(MainFrame.class.getResource(String.format("/img/%s.jpg", name)));
+            this.setSize(d);
             repaint();
         } catch (IOException ex){
             System.out.println(ex.getMessage());
@@ -32,18 +34,13 @@ public class PosterPanel extends javax.swing.JPanel {
 	
     @Override
     public void paintComponent(Graphics g){
-        g.drawImage(img, 0, 0, null);
+        g.drawImage(img, 0, 0, d.width, d.height, null);
     }
     // public PosterPanel(Image img) {
-    public PosterPanel() {
-        try{
-            this.img = ImageIO.read(MainFrame.class.getResource("/img/블랙 팬서_와칸다 포에버.jpg"));
-        } catch (IOException ex){
-            System.out.println(ex.getMessage());
-        }
-        this.setSize(447, 640);
-        setSize(new Dimension(img.getWidth(null),img.getHeight(null)));
-        setPreferredSize(new Dimension(img.getWidth(null),img.getHeight(null)));
+    public PosterPanel(String name) {
+        this.nextImg(name);
+        this.setSize(d);
+        
         setLayout(null);
         setVisible(true);
         initComponents();

@@ -5,6 +5,7 @@
 package moviereservation;
 
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -12,6 +13,13 @@ import javax.swing.ImageIcon;
  * @author 엄상욱
  */
 public class MainFrame extends javax.swing.JFrame {
+    
+    private static DBManager dbManager = DBManagerMySql.getinstance();
+    
+    // 영화 순서
+    int page = 0;
+    String sql = "select * from Movie_Detail";
+    ArrayList<String[]> poster = dbManager.executeQuery(sql);
 
     /**
      * Creates new form MainFrame
@@ -34,8 +42,10 @@ public class MainFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        posterPanel1 = new moviereservation.PosterPanel();
         NextMovies = new javax.swing.JButton();
+        posterPanel1 = new moviereservation.PosterPanel(poster.get(page)[8]);
+        posterPanel2 = new moviereservation.PosterPanel(poster.get(page+1)[8]);
+        posterPanel3 = new moviereservation.PosterPanel(poster.get(page+2)[8]);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 1200, 800));
@@ -89,17 +99,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout posterPanel1Layout = new javax.swing.GroupLayout(posterPanel1);
-        posterPanel1.setLayout(posterPanel1Layout);
-        posterPanel1Layout.setHorizontalGroup(
-            posterPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
-        );
-        posterPanel1Layout.setVerticalGroup(
-            posterPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
-        );
-
         NextMovies.setText("jButton3");
         NextMovies.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,37 +106,85 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout posterPanel1Layout = new javax.swing.GroupLayout(posterPanel1);
+        posterPanel1.setLayout(posterPanel1Layout);
+        posterPanel1Layout.setHorizontalGroup(
+            posterPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 294, Short.MAX_VALUE)
+        );
+        posterPanel1Layout.setVerticalGroup(
+            posterPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout posterPanel2Layout = new javax.swing.GroupLayout(posterPanel2);
+        posterPanel2.setLayout(posterPanel2Layout);
+        posterPanel2Layout.setHorizontalGroup(
+            posterPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 294, Short.MAX_VALUE)
+        );
+        posterPanel2Layout.setVerticalGroup(
+            posterPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout posterPanel3Layout = new javax.swing.GroupLayout(posterPanel3);
+        posterPanel3.setLayout(posterPanel3Layout);
+        posterPanel3Layout.setHorizontalGroup(
+            posterPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 294, Short.MAX_VALUE)
+        );
+        posterPanel3Layout.setVerticalGroup(
+            posterPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(101, 101, 101)
                 .addComponent(posterPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 632, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
+                .addComponent(posterPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(posterPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(NextMovies)
-                .addGap(21, 21, 21))
+                .addGap(9, 9, 9))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(posterPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(posterPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(posterPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(posterPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(244, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(NextMovies)
-                .addGap(336, 336, 336))
+                .addGap(313, 313, 313))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
+        // TODO add your handling code here:
+        dbManager.closeConnection();
+    }        
     private void NextMoviesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextMoviesActionPerformed
         // TODO add your handling code here:
-        posterPanel1.nextImg("올빼미");
+        System.out.println(poster.size());
+        System.out.println(page + " " + poster.get(page)[8]);
+        posterPanel1.nextImg(poster.get(page)[8]);
+        posterPanel2.nextImg(poster.get(page)[8]);
+        posterPanel3.nextImg(poster.get(page)[8]);
+        page++;
     }//GEN-LAST:event_NextMoviesActionPerformed
 
     /**
@@ -183,5 +230,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logoLabel;
     private moviereservation.PosterPanel posterPanel1;
+    private moviereservation.PosterPanel posterPanel2;
+    private moviereservation.PosterPanel posterPanel3;
     // End of variables declaration//GEN-END:variables
 }
